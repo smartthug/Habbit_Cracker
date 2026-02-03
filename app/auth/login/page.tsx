@@ -3,11 +3,12 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { login } from "@/app/actions/auth";
-import { LogIn, Mail, Lock, Sparkles } from "lucide-react";
+import { LogIn, Mail, Lock, Sparkles, Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const [error, setError] = useState<string>("");
   const [isPending, startTransition] = useTransition();
+  const [showPassword, setShowPassword] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -56,20 +57,20 @@ export default function LoginPage() {
 
       <div className="max-w-md w-full relative z-10">
         {/* Logo/Brand Section */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-xl mb-4">
+        <div className="text-center mb-8 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 shadow-premium-lg mb-4 animate-scale-in">
             <Sparkles className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-400 mb-2">
+          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 mb-2 tracking-tight">
             Welcome Back
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 font-medium">
+          <p className="text-slate-600 dark:text-slate-400 font-medium tracking-wide">
             A thinking partner, not just a tracker
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 dark:border-slate-800/50 p-8">
+        <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-3xl shadow-premium-lg border border-white/30 dark:border-slate-800/50 p-8 animate-scale-in">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
               <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl text-sm font-medium shadow-sm">
@@ -111,12 +112,24 @@ export default function LoginPage() {
                   <input
                     id="password"
                     name="password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     autoComplete="current-password"
                     required
-                    className="block w-full pl-12 pr-4 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
+                    className="block w-full pl-12 pr-12 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
                     placeholder="Enter your password"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5" />
+                    ) : (
+                      <Eye className="h-5 w-5" />
+                    )}
+                  </button>
                 </div>
               </div>
             </div>
@@ -125,7 +138,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isPending}
-              className="tap-target group relative w-full flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r from-indigo-500 to-purple-600 active:from-indigo-600 active:to-purple-700 text-white rounded-xl font-semibold shadow-lg active:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-active no-select min-h-[52px] active:scale-[0.98]"
+              className="tap-target group relative w-full flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-600 active:from-indigo-600 active:via-purple-700 active:to-pink-700 text-white rounded-xl font-semibold shadow-premium active:shadow-premium-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-active no-select min-h-[52px] active:scale-[0.98] hover:scale-[1.02] tracking-tight"
             >
               <LogIn className="w-5 h-5 sm:w-6 sm:h-6" />
               <span className="text-base sm:text-lg">{isPending ? "Signing in..." : "Sign In"}</span>

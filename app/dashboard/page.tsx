@@ -7,16 +7,39 @@ import { Plus, Target, Lightbulb, TrendingUp } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import AddModal from "@/components/AddModal";
 import { debugAuth } from "@/lib/auth-debug";
+import connectDB from "@/lib/db";
+import User from "@/models/User";
 
 export default async function DashboardPage() {
   // Debug in development only
   await debugAuth("/dashboard");
 
   // Middleware already handles auth, but we still need user for display
-  const user = await getCurrentUser();
-  if (!user) {
+  const tokenUser = await getCurrentUser();
+  if (!tokenUser) {
     // This shouldn't happen if middleware works correctly
     return null;
+  }
+
+  // Fetch full user data from database to get the name
+  let user;
+  try {
+    await connectDB();
+    const dbUser = await User.findById(tokenUser.userId);
+    if (!dbUser) {
+      return null;
+    }
+    user = {
+      name: dbUser.name,
+      email: dbUser.email,
+    };
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    // Fallback to email if database fetch fails
+    user = {
+      name: tokenUser.email.split("@")[0],
+      email: tokenUser.email,
+    };
   }
 
   let todayHabitsResult;
@@ -49,19 +72,19 @@ export default async function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 safe-bottom">
       <div className="max-w-md mx-auto px-4 sm:px-6 py-4 sm:py-6">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-400">
-            {greeting()}, {user.email.split("@")[0]}
+        <div className="mb-8 animate-fade-in">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 tracking-tight">
+            {greeting()}, {user.name}
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-2 text-sm font-medium">
+          <p className="text-slate-600 dark:text-slate-400 mt-2 text-sm font-medium tracking-wide">
             {format(new Date(), "EEEE, MMMM d, yyyy")}
           </p>
         </div>
 
         {/* Today's Summary */}
-        <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl p-6 mb-6 shadow-lg border border-white/20 dark:border-slate-700/50">
+        <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 mb-6 shadow-premium-lg border border-white/30 dark:border-slate-700/50 animate-scale-in">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Today&apos;s Progress</h2>
+            <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 tracking-tight">Today&apos;s Progress</h2>
             <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-full">
               {completedCount}/{totalCount}
             </span>
@@ -89,7 +112,7 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
           <Link
             href="/habits"
-            className="tap-target group bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-lg active:shadow-xl border border-white/20 dark:border-slate-700/50 transition-all duration-200 touch-active active:-translate-y-0.5"
+            className="tap-target group bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-premium active:shadow-premium-lg border border-white/30 dark:border-slate-700/50 transition-all duration-200 touch-active active:scale-[0.98] hover:scale-[1.02] animate-fade-in"
           >
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-3 group-active:scale-110 transition-transform">
               <Target className="w-6 h-6 text-white" />
@@ -101,7 +124,7 @@ export default async function DashboardPage() {
           </Link>
           <Link
             href="/ideas"
-            className="tap-target group bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-lg active:shadow-xl border border-white/20 dark:border-slate-700/50 transition-all duration-200 touch-active active:-translate-y-0.5"
+            className="tap-target group bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-premium active:shadow-premium-lg border border-white/30 dark:border-slate-700/50 transition-all duration-200 touch-active active:scale-[0.98] hover:scale-[1.02] animate-fade-in"
           >
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-3 group-active:scale-110 transition-transform">
               <Lightbulb className="w-6 h-6 text-white" />
@@ -115,9 +138,9 @@ export default async function DashboardPage() {
 
         {/* Recent Ideas */}
         {recentIdeas.length > 0 && (
-          <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl p-6 shadow-lg mb-6 border border-white/20 dark:border-slate-700/50">
+          <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 shadow-premium-lg mb-6 border border-white/30 dark:border-slate-700/50 animate-scale-in">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Recent Ideas</h2>
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 tracking-tight">Recent Ideas</h2>
               <Link
                 href="/ideas"
                 className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
@@ -152,7 +175,7 @@ export default async function DashboardPage() {
 
         {/* Streak Indicator */}
         {totalCount > 0 && (
-          <div className="relative overflow-hidden rounded-2xl p-6 text-white shadow-xl">
+          <div className="relative overflow-hidden rounded-2xl p-6 text-white shadow-premium-lg animate-scale-in">
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 opacity-90"></div>
             <div className="absolute inset-0 opacity-20" style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
