@@ -55,7 +55,7 @@ export default function LoginPage() {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-300/10 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-md w-full relative z-10">
+      <div className="max-w-md md:max-w-lg lg:max-w-xl w-full relative z-10">
         {/* Logo/Brand Section */}
         <div className="text-center mb-8 animate-fade-in">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 shadow-premium-lg mb-4 animate-scale-in">

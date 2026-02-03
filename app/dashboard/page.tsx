@@ -70,19 +70,19 @@ export default async function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 safe-bottom">
-      <div className="max-w-md mx-auto px-4 sm:px-6 py-4 sm:py-6">
-        <div className="mb-8 animate-fade-in">
-          <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 tracking-tight">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom">
+      <div className="max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-8">
+        <div className="mb-6 md:mb-8 animate-fade-in">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 tracking-tight">
             {greeting()}, {user.name}
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-2 text-sm font-medium tracking-wide">
+          <p className="text-slate-600 dark:text-slate-400 mt-2 text-sm md:text-base font-medium tracking-wide">
             {format(new Date(), "EEEE, MMMM d, yyyy")}
           </p>
         </div>
 
         {/* Today's Summary */}
-        <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 mb-6 shadow-premium-lg border border-white/30 dark:border-slate-700/50 animate-scale-in">
+        <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 md:p-8 mb-6 shadow-premium-lg border border-white/30 dark:border-slate-700/50 animate-scale-in">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 tracking-tight">Today&apos;s Progress</h2>
             <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-full">
@@ -109,7 +109,7 @@ export default async function DashboardPage() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
           <Link
             href="/habits"
             className="tap-target group bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-premium active:shadow-premium-lg border border-white/30 dark:border-slate-700/50 transition-all duration-200 touch-active active:scale-[0.98] hover:scale-[1.02] animate-fade-in"
@@ -138,7 +138,7 @@ export default async function DashboardPage() {
 
         {/* Recent Ideas */}
         {recentIdeas.length > 0 && (
-          <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 shadow-premium-lg mb-6 border border-white/30 dark:border-slate-700/50 animate-scale-in">
+          <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-premium-lg mb-6 border border-white/30 dark:border-slate-700/50 animate-scale-in">
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 tracking-tight">Recent Ideas</h2>
               <Link
@@ -148,11 +148,11 @@ export default async function DashboardPage() {
                 View all →
               </Link>
             </div>
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:space-y-0">
               {recentIdeas.map((idea: any) => (
                 <div
                   key={idea._id}
-                  className="p-4 bg-gradient-to-r from-indigo-50/50 to-purple-50/50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl border-l-4 border-indigo-500 hover:shadow-md transition-shadow"
+                  className="p-4 bg-gradient-to-r from-indigo-50/50 to-purple-50/50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl border-l-4 border-indigo-500 hover:shadow-md transition-shadow h-full"
                 >
                   <p className="text-sm text-slate-900 dark:text-slate-100 line-clamp-2 font-medium">{idea.text}</p>
                   {idea.tags && idea.tags.length > 0 && (
@@ -175,7 +175,7 @@ export default async function DashboardPage() {
 
         {/* Streak Indicator */}
         {totalCount > 0 && (
-          <div className="relative overflow-hidden rounded-2xl p-6 text-white shadow-premium-lg animate-scale-in">
+          <div className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white shadow-premium-lg animate-scale-in">
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 opacity-90"></div>
             <div className="absolute inset-0 opacity-20" style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`

@@ -24,6 +24,14 @@ const config: Config = {
       backdropBlur: {
         xs: "2px",
       },
+      screens: {
+        'xs': '475px',
+        '3xl': '1600px',
+      },
+      maxWidth: {
+        '8xl': '88rem',
+        '9xl': '96rem',
+      },
     },
   },
   plugins: [],

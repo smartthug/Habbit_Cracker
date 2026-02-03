@@ -100,21 +100,24 @@ export default function IdeasPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <p className="text-gray-500 dark:text-gray-400">Loading...</p>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-amber-200 dark:border-amber-800 border-t-amber-600 dark:border-t-amber-400 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-600 dark:text-slate-400 font-medium">Loading ideas...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 safe-bottom">
-      <div className="max-w-md mx-auto px-4 sm:px-6 py-4 sm:py-6">
-        <div className="flex items-center justify-between mb-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom">
+      <div className="max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-8">
+        <div className="flex items-center justify-between mb-6 md:mb-8">
           <div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent dark:from-amber-400 dark:to-orange-500">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent dark:from-amber-400 dark:to-orange-500 tracking-tight">
               Idea Vault
             </h1>
-            <p className="text-slate-600 dark:text-slate-400 text-sm mt-1">Capture and organize your thoughts</p>
+            <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base mt-1 font-medium">Capture and organize your thoughts</p>
           </div>
           <button
             onClick={() => setShowAddModal(true)}
@@ -148,7 +151,7 @@ export default function IdeasPage() {
           </button>
 
           {showFilters && (
-            <div className="mt-3 p-5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-xl border border-slate-200 dark:border-slate-700 space-y-4 shadow-lg">
+            <div className="mt-3 p-5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-xl border border-slate-200 dark:border-slate-700 space-y-4 shadow-lg md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-4 md:space-y-0">
               <div>
                 <label className="block text-sm font-medium mb-2">Topic</label>
                 <select
@@ -198,7 +201,7 @@ export default function IdeasPage() {
                     setSelectedHabit("");
                     setSelectedPriority("");
                   }}
-                  className="w-full py-2 px-4 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+                  className="w-full md:col-span-2 lg:col-span-4 py-2 px-4 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 font-medium"
                 >
                   Clear filters
                 </button>
@@ -228,13 +231,13 @@ export default function IdeasPage() {
             )}
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {filteredIdeas.map((idea) => {
               const isExpanded = expandedIdeas.has(idea._id);
               return (
                 <div
                   key={idea._id}
-                  className={`bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl p-5 shadow-lg border-l-4 hover:shadow-xl transition-all duration-300 ${
+                  className={`bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl p-5 shadow-lg border-l-4 hover:shadow-xl transition-all duration-300 h-full flex flex-col ${
                     idea.priority === "important"
                       ? "border-amber-500 bg-gradient-to-r from-amber-50/50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/20"
                       : "border-indigo-500"
@@ -264,8 +267,8 @@ export default function IdeasPage() {
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-between mt-4">
-                    <div className="flex flex-wrap gap-2">
+                  <div className="flex items-center justify-between mt-auto pt-4">
+                    <div className="flex flex-wrap gap-2 flex-1">
                       {idea.habitId && (
                         <span className="text-xs px-2.5 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full font-medium">
                           🔗 {habits.find((h) => h._id === idea.habitId)?.name || "Habit"}
@@ -284,7 +287,7 @@ export default function IdeasPage() {
                         </>
                       )}
                     </div>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium ml-2 flex-shrink-0">
                       {format(new Date(idea.createdAt), "MMM d")}
                     </span>
                   </div>

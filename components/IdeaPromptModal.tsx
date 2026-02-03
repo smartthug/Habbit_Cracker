@@ -54,31 +54,32 @@ export default function IdeaPromptModal({
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div
-        className="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl"
+        className="w-full max-w-md md:max-w-lg bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-800/50"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-6">
+        <div className="p-6 md:p-8">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <Lightbulb className="w-6 h-6 text-yellow-500" />
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Capture an Idea</h2>
+              <Lightbulb className="w-6 h-6 md:w-7 md:h-7 text-amber-500 dark:text-amber-400" />
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 dark:text-slate-100">Capture an Idea</h2>
             </div>
             <button
               onClick={handleSkip}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
+              className="tap-target p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors touch-active"
+              aria-label="Close"
             >
-              <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+              <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
             </button>
           </div>
 
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            You completed <span className="font-semibold">{habitName}</span>. Any thoughts or ideas?
+          <p className="text-sm md:text-base text-slate-600 dark:text-slate-400 mb-4 font-medium">
+            You completed <span className="font-semibold text-indigo-600 dark:text-indigo-400">{habitName}</span>. Any thoughts or ideas?
           </p>
 
           {error && (
-            <div className="mb-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
+            <div className="mb-4 bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl text-sm font-medium shadow-sm">
               {error}
             </div>
           )}
@@ -89,7 +90,7 @@ export default function IdeaPromptModal({
               onChange={(e) => setIdeaText(e.target.value)}
               autoFocus
               rows={4}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-3 md:py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
               placeholder="What's on your mind?"
             />
 
@@ -97,14 +98,14 @@ export default function IdeaPromptModal({
               <button
                 type="button"
                 onClick={handleSkip}
-                className="flex-1 py-2 px-4 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                className="tap-target flex-1 py-3 md:py-3.5 px-4 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-xl font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors touch-active no-select min-h-[48px]"
               >
                 Skip
               </button>
               <button
                 type="submit"
                 disabled={loading || !ideaText.trim()}
-                className="flex-1 py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="tap-target flex-1 py-3 md:py-3.5 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg active:shadow-xl active:scale-[0.98] touch-active no-select min-h-[48px]"
               >
                 {loading ? "Saving..." : "Save Idea"}
               </button>

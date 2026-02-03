@@ -100,9 +100,9 @@ export default function AddModal({ isOpen, onClose, defaultTab = "idea" }: AddMo
   }
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-end md:items-center md:justify-center" onClick={onClose}>
       <div
-        className="w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-t-3xl max-h-[90vh] overflow-y-auto shadow-2xl border-t border-slate-200/50 dark:border-slate-800/50"
+        className="w-full md:w-auto md:max-w-2xl lg:max-w-3xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-t-3xl md:rounded-3xl max-h-[90vh] overflow-y-auto shadow-2xl border-t md:border border-slate-200/50 dark:border-slate-800/50 md:mx-4"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-800/50 px-5 py-4 flex items-center justify-between">

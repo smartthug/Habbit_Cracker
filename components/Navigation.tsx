@@ -19,7 +19,8 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-t border-slate-200/50 dark:border-slate-800/50 z-50 shadow-premium-lg safe-bottom">
+      {/* Mobile Navigation - Bottom */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-t border-slate-200/50 dark:border-slate-800/50 z-50 shadow-premium-lg safe-bottom md:hidden">
         <div className="max-w-md mx-auto flex items-center justify-around h-20 px-2 pb-safe">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -52,6 +53,42 @@ export default function Navigation() {
               <Plus className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
             <span className="text-xs sm:text-sm mt-1 font-semibold text-indigo-600 dark:text-indigo-400 tracking-tight">Add</span>
+          </button>
+        </div>
+      </nav>
+
+      {/* Desktop/Tablet Navigation - Sidebar */}
+      <nav className="hidden md:flex fixed left-0 top-0 bottom-0 w-20 lg:w-64 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-800/50 z-50 shadow-premium-lg flex-col items-center lg:items-start py-6 px-4 lg:px-6 safe-top overflow-y-auto">
+        <div className="w-full flex flex-col items-center lg:items-start gap-2">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href || pathname?.startsWith(item.href + "/");
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`tap-target w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 touch-active no-select ${
+                  isActive
+                    ? "text-indigo-600 dark:text-indigo-400 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40 shadow-premium"
+                    : "text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
+              >
+                <Icon className="w-6 h-6 flex-shrink-0" />
+                <span className={`hidden lg:block text-sm font-semibold tracking-tight ${isActive ? "text-indigo-600 dark:text-indigo-400" : ""}`}>
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="tap-target w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 text-white shadow-premium hover:shadow-premium-lg transition-all duration-200 touch-active no-select active:scale-95"
+            aria-label="Add new item"
+          >
+            <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+              <Plus className="w-6 h-6 text-white" />
+            </div>
+            <span className="hidden lg:block text-sm font-semibold tracking-tight">Add New</span>
           </button>
         </div>
       </nav>
