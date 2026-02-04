@@ -1,22 +1,46 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getUserTheme } from "@/app/actions/theme";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    // Initialize theme from localStorage or system preference
-    const savedTheme = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const isDark = savedTheme === "dark" || (!savedTheme && systemPrefersDark);
-    
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    const initializeTheme = async () => {
+      setMounted(true);
+      
+      // Try to get theme from database first
+      try {
+        const result = await getUserTheme();
+        if (result.success && result.theme) {
+          const isDark = result.theme === "dark";
+          if (isDark) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+          // Sync with localStorage
+          localStorage.setItem("theme", result.theme);
+          return;
+        }
+      } catch (error) {
+        console.log("[THEME] Could not load theme from database, using fallback");
+      }
+
+      // Fallback to localStorage or system preference
+      const savedTheme = localStorage.getItem("theme");
+      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const isDark = savedTheme === "dark" || (!savedTheme && systemPrefersDark);
+      
+      if (isDark) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    };
+
+    initializeTheme();
   }, []);
 
   // Prevent hydration mismatch by not rendering until mounted
@@ -32,23 +56,56 @@ export function useTheme() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const savedTheme = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const isDark = savedTheme === "dark" || (!savedTheme && systemPrefersDark);
-    setDarkMode(isDark);
+    const loadTheme = async () => {
+      setMounted(true);
+      
+      // Try to get theme from database first
+      try {
+        const result = await getUserTheme();
+        if (result.success && result.theme) {
+          const isDark = result.theme === "dark";
+          setDarkMode(isDark);
+          // Sync with localStorage
+          localStorage.setItem("theme", result.theme);
+          return;
+        }
+      } catch (error) {
+        console.log("[THEME] Could not load theme from database, using fallback");
+      }
+
+      // Fallback to localStorage or system preference
+      const savedTheme = localStorage.getItem("theme");
+      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const isDark = savedTheme === "dark" || (!savedTheme && systemPrefersDark);
+      setDarkMode(isDark);
+    };
+
+    loadTheme();
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = async () => {
     const newTheme = !darkMode;
     setDarkMode(newTheme);
     
+    const themeValue = newTheme ? "dark" : "light";
+    
+    // Update DOM immediately for instant feedback
     if (newTheme) {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+    }
+    
+    // Save to localStorage immediately
+    localStorage.setItem("theme", themeValue);
+    
+    // Save to database in the background
+    try {
+      const { updateUserTheme } = await import("@/app/actions/theme");
+      await updateUserTheme(themeValue);
+    } catch (error) {
+      console.error("[THEME] Failed to save theme to database:", error);
+      // Continue anyway - localStorage is already updated
     }
   };
 

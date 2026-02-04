@@ -34,47 +34,38 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-indigo-50 to-pink-50 dark:bg-slate-950 px-4 py-12 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-indigo-300/20 dark:bg-indigo-300/0 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-purple-300/20 dark:bg-purple-300/0 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-300/10 dark:bg-pink-300/0 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="max-w-md md:max-w-lg lg:max-w-xl w-full relative z-10">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4 sm:px-6 py-8 sm:py-12">
+      <div className="w-full max-w-md mx-auto">
         {/* Logo/Brand Section */}
-        <div className="text-center mb-8 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 via-indigo-600 to-pink-600 shadow-premium-lg mb-4 animate-scale-in">
-            <Sparkles className="w-10 h-10 text-white" />
+        <div className="text-center mb-8 sm:mb-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 shadow-lg mb-4 sm:mb-6">
+            <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 bg-clip-text text-transparent dark:from-purple-400 dark:via-indigo-400 dark:to-pink-400 mb-2 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2 sm:mb-3">
             Get Started
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 font-medium tracking-wide">
-            Start tracking habits and capturing ideas
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+            Create your account to start tracking
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-slate-50/95 via-slate-50/90 to-purple-50/30 dark:bg-slate-900 backdrop-blur-xl rounded-3xl shadow-premium-xl border border-purple-200/30 dark:border-slate-700/50 p-8 md:p-10 lg:p-12 animate-scale-in">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-400/10 to-indigo-400/10 dark:from-purple-400/0 dark:to-indigo-400/0 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-          <div className="relative z-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+        <div className="bg-slate-50 dark:bg-slate-800 rounded-2xl sm:rounded-3xl shadow-premium-lg border border-slate-200/50 dark:border-slate-700/50 p-6 sm:p-8 md:p-10">
+          <form className="space-y-5 sm:space-y-6" onSubmit={handleSubmit}>
             {error && (
-              <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl text-sm font-medium shadow-sm">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-lg text-sm font-medium">
                 {error}
               </div>
             )}
 
-            <div className="space-y-4">
+            <div className="space-y-4 sm:space-y-5">
               {/* Name Input */}
               <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Full Name
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
                     <User className="h-5 w-5 text-slate-400" />
                   </div>
                   <input
@@ -83,7 +74,7 @@ export default function SignupPage() {
                     type="text"
                     autoComplete="name"
                     required
-                    className="block w-full pl-12 pr-4 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/80 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
+                    className="block w-full pl-10 sm:pl-12 pr-4 py-3 sm:py-3.5 text-base border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                     placeholder="John Doe"
                   />
                 </div>
@@ -91,11 +82,11 @@ export default function SignupPage() {
 
               {/* Email Input */}
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Email Address
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
                     <Mail className="h-5 w-5 text-slate-400" />
                   </div>
                   <input
@@ -104,7 +95,7 @@ export default function SignupPage() {
                     type="email"
                     autoComplete="email"
                     required
-                    className="block w-full pl-12 pr-4 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/80 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
+                    className="block w-full pl-10 sm:pl-12 pr-4 py-3 sm:py-3.5 text-base border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                     placeholder="you@example.com"
                   />
                 </div>
@@ -112,11 +103,11 @@ export default function SignupPage() {
 
               {/* Password Input */}
               <div>
-                <label htmlFor="password" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
+                <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Password
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <div className="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
                     <Lock className="h-5 w-5 text-slate-400" />
                   </div>
                   <input
@@ -126,13 +117,13 @@ export default function SignupPage() {
                     autoComplete="new-password"
                     required
                     minLength={6}
-                    className="block w-full pl-12 pr-12 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/80 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
+                    className="block w-full pl-10 sm:pl-12 pr-12 py-3 sm:py-3.5 text-base border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                     placeholder="Min. 6 characters"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                    className="absolute inset-y-0 right-0 pr-3 sm:pr-4 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors tap-target"
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? (
@@ -152,32 +143,26 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={isPending}
-              className="tap-target group relative w-full flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r from-purple-500 via-indigo-600 to-pink-600 active:from-purple-600 active:via-indigo-700 active:to-pink-700 text-white rounded-xl font-semibold shadow-premium active:shadow-premium-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 touch-active no-select min-h-[52px] active:scale-[0.98] hover:scale-[1.02] tracking-tight"
+              className="tap-target w-full flex items-center justify-center gap-2 py-3 sm:py-3.5 px-6 bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-600 hover:from-indigo-600 hover:via-purple-700 hover:to-pink-700 active:from-indigo-700 active:via-purple-800 active:to-pink-800 text-white rounded-lg font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 min-h-[48px] sm:min-h-[52px] text-base sm:text-lg"
             >
-              <UserPlus className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="text-base sm:text-lg">{isPending ? "Creating account..." : "Create Account"}</span>
+              <UserPlus className="w-5 h-5" />
+              <span>{isPending ? "Creating account..." : "Create Account"}</span>
             </button>
 
             {/* Sign In Link */}
-            <div className="text-center pt-4">
+            <div className="text-center pt-2">
               <p className="text-sm text-slate-600 dark:text-slate-400">
                 Already have an account?{" "}
                 <Link
                   href="/auth/login"
-                  className="font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors"
+                  className="font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent hover:from-indigo-700 hover:to-purple-700 dark:hover:from-indigo-300 dark:hover:to-purple-300 transition-all"
                 >
                   Sign in
                 </Link>
               </p>
             </div>
           </form>
-          </div>
         </div>
-
-        {/* Footer */}
-        <p className="text-center text-xs text-slate-500 dark:text-slate-500 mt-6">
-          Secure signup with encrypted passwords
-        </p>
       </div>
     </div>
   );

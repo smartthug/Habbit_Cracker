@@ -4,6 +4,7 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
+  theme?: "light" | "dark";
   createdAt: Date;
 }
 
@@ -26,6 +27,11 @@ const UserSchema: Schema = new Schema(
       type: String,
       required: [true, "Password is required"],
       minlength: 6,
+    },
+    theme: {
+      type: String,
+      enum: ["light", "dark"],
+      default: "light",
     },
   },
   {
