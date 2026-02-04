@@ -30,13 +30,15 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom animate-fade-in">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom animate-fade-in">
       <div className="max-w-md md:max-w-2xl lg:max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-8">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-400 mb-6 md:mb-8 tracking-tight">
           Profile
         </h1>
 
-        <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-5 sm:p-6 shadow-premium-lg border border-white/30 dark:border-slate-700/50 mb-4 animate-scale-in">
+        <div className="relative overflow-hidden bg-slate-50 dark:bg-slate-800 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-premium-lg border border-slate-200/50 dark:border-slate-700/50 mb-4 animate-scale-in">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-400/0 to-purple-400/0 dark:from-indigo-400/0 dark:to-purple-400/0 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div className="relative z-10">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="font-semibold text-lg text-slate-900 dark:text-slate-100 mb-1 tracking-tight">Appearance</h2>
@@ -54,9 +56,12 @@ export default function ProfilePage() {
               )}
             </button>
           </div>
+          </div>
         </div>
 
-        <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-5 sm:p-6 shadow-premium-lg border border-white/30 dark:border-slate-700/50 animate-scale-in">
+        <div className="relative overflow-hidden bg-slate-50 dark:bg-slate-800 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-premium-lg border border-slate-200/50 dark:border-slate-700/50 animate-scale-in">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-400/0 to-orange-400/0 dark:from-red-400/0 dark:to-orange-400/0 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div className="relative z-10">
           <button
             onClick={handleLogout}
             className="tap-target w-full flex items-center justify-center gap-2 py-4 px-4 bg-gradient-to-r from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-900/30 text-red-600 dark:text-red-400 rounded-xl font-semibold active:scale-95 transition-all duration-200 touch-active no-select min-h-[52px] shadow-premium hover:shadow-premium-lg"
@@ -64,6 +69,7 @@ export default function ProfilePage() {
             <LogOut className="w-5 h-5 sm:w-6 sm:h-6" />
             <span className="text-base sm:text-lg tracking-tight">Sign Out</span>
           </button>
+          </div>
         </div>
       </div>
 

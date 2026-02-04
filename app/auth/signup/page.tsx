@@ -34,12 +34,12 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-indigo-50 to-pink-50 dark:from-slate-950 dark:via-purple-950 dark:to-indigo-950 px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-indigo-50 to-pink-50 dark:bg-slate-950 px-4 py-12 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-indigo-300/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-300/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-10 w-72 h-72 bg-indigo-300/20 dark:bg-indigo-300/0 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-purple-300/20 dark:bg-purple-300/0 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-300/10 dark:bg-pink-300/0 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-md md:max-w-lg lg:max-w-xl w-full relative z-10">
@@ -57,7 +57,9 @@ export default function SignupPage() {
         </div>
 
         {/* Form Card */}
-        <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-3xl shadow-premium-lg border border-white/30 dark:border-slate-800/50 p-8 animate-scale-in">
+        <div className="relative overflow-hidden bg-gradient-to-br from-slate-50/95 via-slate-50/90 to-purple-50/30 dark:bg-slate-900 backdrop-blur-xl rounded-3xl shadow-premium-xl border border-purple-200/30 dark:border-slate-700/50 p-8 md:p-10 lg:p-12 animate-scale-in">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-purple-400/10 to-indigo-400/10 dark:from-purple-400/0 dark:to-indigo-400/0 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div className="relative z-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {error && (
               <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl text-sm font-medium shadow-sm">
@@ -81,7 +83,7 @@ export default function SignupPage() {
                     type="text"
                     autoComplete="name"
                     required
-                    className="block w-full pl-12 pr-4 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
+                    className="block w-full pl-12 pr-4 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/80 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
                     placeholder="John Doe"
                   />
                 </div>
@@ -102,7 +104,7 @@ export default function SignupPage() {
                     type="email"
                     autoComplete="email"
                     required
-                    className="block w-full pl-12 pr-4 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
+                    className="block w-full pl-12 pr-4 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/80 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
                     placeholder="you@example.com"
                   />
                 </div>
@@ -124,7 +126,7 @@ export default function SignupPage() {
                     autoComplete="new-password"
                     required
                     minLength={6}
-                    className="block w-full pl-12 pr-12 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
+                    className="block w-full pl-12 pr-12 py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/80 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
                     placeholder="Min. 6 characters"
                   />
                   <button
@@ -169,6 +171,7 @@ export default function SignupPage() {
               </p>
             </div>
           </form>
+          </div>
         </div>
 
         {/* Footer */}

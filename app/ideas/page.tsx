@@ -100,7 +100,7 @@ export default function IdeasPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-amber-200 dark:border-amber-800 border-t-amber-600 dark:border-t-amber-400 rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-slate-600 dark:text-slate-400 font-medium">Loading ideas...</p>
@@ -110,7 +110,7 @@ export default function IdeasPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom">
       <div className="max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-8">
         <div className="flex items-center justify-between mb-6 md:mb-8">
           <div>
@@ -130,13 +130,13 @@ export default function IdeasPage() {
 
         {/* Search */}
         <div className="relative mb-4">
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+          <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-slate-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search ideas..."
-            className="w-full pl-12 pr-4 py-3.5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 shadow-sm"
+            className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-3.5 text-sm sm:text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/90 dark:bg-slate-800/80 backdrop-blur-xl text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 shadow-sm transition-all min-h-[48px]"
           />
         </div>
 
@@ -144,20 +144,20 @@ export default function IdeasPage() {
         <div className="mb-4">
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="tap-target flex items-center gap-2 px-4 py-3 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 active:bg-white dark:active:bg-slate-800 transition-colors shadow-sm touch-active no-select min-h-[44px]"
+            className="tap-target w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-3 bg-slate-50/90 dark:bg-slate-800/80 backdrop-blur-xl border border-slate-200 dark:border-slate-700 rounded-xl text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-300 active:bg-slate-100 dark:active:bg-slate-800 transition-colors shadow-sm touch-active no-select min-h-[48px] hover:scale-[1.02] active:scale-[0.98]"
           >
             <Filter className="w-4 h-4 sm:w-5 sm:h-5" />
             <span>Filters</span>
           </button>
 
           {showFilters && (
-            <div className="mt-3 p-5 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-xl border border-slate-200 dark:border-slate-700 space-y-4 shadow-lg md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-4 md:space-y-0">
+            <div className="mt-3 p-5 bg-slate-50/90 dark:bg-slate-800/80 backdrop-blur-xl rounded-xl border border-slate-200 dark:border-slate-700 space-y-4 shadow-lg md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-4 md:space-y-0">
               <div>
                 <label className="block text-sm font-medium mb-2">Topic</label>
                 <select
                   value={selectedTopic}
                   onChange={(e) => setSelectedTopic(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-slate-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="">All topics</option>
                   {topics.map((topic) => (
@@ -172,7 +172,7 @@ export default function IdeasPage() {
                 <select
                   value={selectedHabit}
                   onChange={(e) => setSelectedHabit(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-slate-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="">All habits</option>
                   {habits.map((habit) => (
@@ -187,7 +187,7 @@ export default function IdeasPage() {
                 <select
                   value={selectedPriority}
                   onChange={(e) => setSelectedPriority(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-slate-50 dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option value="">All priorities</option>
                   <option value="normal">Normal</option>
@@ -237,12 +237,14 @@ export default function IdeasPage() {
               return (
                 <div
                   key={idea._id}
-                  className={`bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl p-5 shadow-lg border-l-4 hover:shadow-xl transition-all duration-300 h-full flex flex-col ${
+                  className={`group relative overflow-hidden bg-slate-50 dark:bg-slate-800 backdrop-blur-xl rounded-3xl p-6 md:p-7 shadow-premium-lg border-l-4 hover:shadow-premium-xl hover:scale-[1.02] transition-all duration-300 h-full flex flex-col ${
                     idea.priority === "important"
-                      ? "border-amber-500 bg-gradient-to-r from-amber-50/50 to-orange-50/50 dark:from-amber-900/20 dark:to-orange-900/20"
+                      ? "border-amber-500"
                       : "border-indigo-500"
                   }`}
                 >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-400/0 to-purple-400/0 dark:from-indigo-400/0 dark:to-purple-400/0 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="relative z-10">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex-1">
                       {idea.priority === "important" && (
@@ -252,7 +254,7 @@ export default function IdeasPage() {
                         </div>
                       )}
                       <p
-                        className={`text-slate-900 dark:text-slate-100 font-medium ${
+                        className={`text-slate-900 dark:text-slate-100 font-semibold text-base md:text-lg leading-relaxed ${
                           isExpanded ? "" : "line-clamp-2"
                         }`}
                       >
@@ -295,11 +297,12 @@ export default function IdeasPage() {
                   {idea.text.length > 100 && (
                     <button
                       onClick={() => toggleExpand(idea._id)}
-                      className="mt-3 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+                      className="mt-3 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors relative z-10"
                     >
                       {isExpanded ? "Show less" : "Show more →"}
                     </button>
                   )}
+                  </div>
                 </div>
               );
             })}

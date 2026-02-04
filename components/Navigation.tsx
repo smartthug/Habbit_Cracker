@@ -20,7 +20,7 @@ export default function Navigation() {
   return (
     <>
       {/* Mobile Navigation - Bottom */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-t border-slate-200/50 dark:border-slate-800/50 z-50 shadow-premium-lg safe-bottom md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 bg-slate-50/95 dark:bg-slate-900/90 backdrop-blur-xl border-t border-slate-200/50 dark:border-slate-800/50 z-50 shadow-premium-lg safe-bottom md:hidden">
         <div className="max-w-md mx-auto flex items-center justify-around h-20 px-2 pb-safe">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -35,8 +35,8 @@ export default function Navigation() {
                     : "text-slate-500 dark:text-slate-400 active:text-slate-700 dark:active:text-slate-300"
                 }`}
               >
-                <div className={`p-2.5 rounded-xl transition-all duration-200 ${isActive ? "bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40 shadow-premium" : "active:bg-slate-100 dark:active:bg-slate-800"}`}>
-                  <Icon className="w-6 h-6 sm:w-7 sm:h-7" />
+                <div className={`p-2.5 rounded-xl transition-all duration-200 ${isActive ? "bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg scale-110" : "active:bg-slate-100 dark:active:bg-slate-800"}`}>
+                  <Icon className={`w-6 h-6 sm:w-7 sm:h-7 ${isActive ? "text-white" : ""}`} />
                 </div>
                 <span className={`text-xs sm:text-sm mt-1 font-semibold tracking-tight ${isActive ? "text-indigo-600 dark:text-indigo-400" : ""}`}>
                   {item.label}
@@ -58,7 +58,7 @@ export default function Navigation() {
       </nav>
 
       {/* Desktop/Tablet Navigation - Sidebar */}
-      <nav className="hidden md:flex fixed left-0 top-0 bottom-0 w-20 lg:w-64 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-800/50 z-50 shadow-premium-lg flex-col items-center lg:items-start py-6 px-4 lg:px-6 safe-top overflow-y-auto">
+      <nav className="hidden md:flex fixed left-0 top-0 bottom-0 w-20 lg:w-64 bg-slate-50 dark:bg-slate-900 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-700/50 z-50 shadow-premium-lg flex-col items-center lg:items-start py-6 px-4 lg:px-6 safe-top overflow-y-auto">
         <div className="w-full flex flex-col items-center lg:items-start gap-2">
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -69,8 +69,8 @@ export default function Navigation() {
                 href={item.href}
                 className={`tap-target w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 touch-active no-select ${
                   isActive
-                    ? "text-indigo-600 dark:text-indigo-400 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/40 dark:to-purple-900/40 shadow-premium"
-                    : "text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    ? "text-white bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg scale-105"
+                    : "text-slate-500 dark:text-slate-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/80"
                 }`}
               >
                 <Icon className="w-6 h-6 flex-shrink-0" />

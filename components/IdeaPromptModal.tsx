@@ -56,7 +56,7 @@ export default function IdeaPromptModal({
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div
-        className="w-full max-w-md md:max-w-lg bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-800/50"
+        className="w-full max-w-md md:max-w-lg bg-slate-50/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl md:rounded-3xl shadow-2xl border border-slate-200/50 dark:border-slate-800/50"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6 md:p-8">
@@ -90,7 +90,7 @@ export default function IdeaPromptModal({
               onChange={(e) => setIdeaText(e.target.value)}
               autoFocus
               rows={4}
-              className="w-full px-4 py-3 md:py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
+              className="w-full px-4 py-3 md:py-4 text-base border border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50/80 dark:bg-slate-800/50 backdrop-blur-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
               placeholder="What's on your mind?"
             />
 

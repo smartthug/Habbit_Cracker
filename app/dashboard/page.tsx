@@ -56,7 +56,8 @@ export default async function DashboardPage() {
   }
 
   const todayHabits = todayHabitsResult.success ? todayHabitsResult.habits : [];
-  const recentIdeas = recentIdeasResult.success ? recentIdeasResult.ideas.slice(0, 5) : [];
+  const allIdeasResult = recentIdeasResult.success ? recentIdeasResult.ideas : [];
+  const totalIdeasCount = allIdeasResult.length;
 
   const completedCount = todayHabits.filter((h: any) => h.todayStatus === "done").length;
   const totalCount = todayHabits.length;
@@ -70,19 +71,21 @@ export default async function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom">
       <div className="max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-8">
-        <div className="mb-6 md:mb-8 animate-fade-in">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 tracking-tight">
-            {greeting()}, {user.name}
+        <div className="mb-8 md:mb-10 lg:mb-12 animate-fade-in">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 tracking-tight leading-tight">
+            {greeting()},<br className="hidden md:block" /> <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">{user.name}</span>
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-2 text-sm md:text-base font-medium tracking-wide">
+          <p className="text-slate-600 dark:text-slate-400 mt-3 md:mt-4 text-base md:text-lg lg:text-xl font-semibold tracking-wide">
             {format(new Date(), "EEEE, MMMM d, yyyy")}
           </p>
         </div>
 
-        {/* Today's Summary */}
-        <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 md:p-8 mb-6 shadow-premium-lg border border-white/30 dark:border-slate-700/50 animate-scale-in">
+        {/* Today's Summary - Premium Card */}
+        <div className="relative overflow-hidden bg-slate-50 dark:bg-slate-800 backdrop-blur-xl rounded-3xl p-6 md:p-8 lg:p-10 mb-6 shadow-premium-lg border border-slate-200/50 dark:border-slate-700/50 animate-scale-in">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-400/0 to-purple-400/0 dark:from-indigo-400/0 dark:to-purple-400/0 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div className="relative z-10">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 tracking-tight">Today&apos;s Progress</h2>
             <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-full">
@@ -90,103 +93,83 @@ export default async function DashboardPage() {
             </span>
           </div>
           <div className="mb-4">
-            <div className="flex items-center justify-between text-sm mb-3">
-              <span className="text-slate-600 dark:text-slate-400 font-medium">Completion Rate</span>
-              <span className="font-bold text-lg text-indigo-600 dark:text-indigo-400">{completionRate}%</span>
+            <div className="flex items-center justify-between text-sm md:text-base mb-4">
+              <span className="text-slate-600 dark:text-slate-400 font-semibold">Completion Rate</span>
+              <span className="font-extrabold text-2xl md:text-3xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">{completionRate}%</span>
             </div>
-            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-3 overflow-hidden">
+            <div className="w-full bg-slate-200/80 dark:bg-slate-700/80 rounded-full h-4 md:h-5 overflow-hidden shadow-inner">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition-all duration-500 ease-out shadow-glow-sm"
+                className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition-all duration-700 ease-out shadow-glow-sm relative overflow-hidden"
                 style={{ width: `${completionRate}%` }}
-              />
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-100/40 to-transparent animate-shimmer"></div>
+              </div>
             </div>
           </div>
           {totalCount === 0 && (
-            <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-6 bg-slate-50 dark:bg-slate-700/50 rounded-xl">
+            <p className="text-sm md:text-base text-slate-500 dark:text-slate-400 text-center py-6 md:py-8 bg-slate-100 dark:from-slate-700/30 dark:to-indigo-950/20 dark:bg-gradient-to-r rounded-2xl font-medium border border-slate-200/50 dark:border-slate-700/30">
               No habits for today. Create one to get started! 🚀
             </p>
           )}
+          </div>
         </div>
 
-        {/* Quick Actions */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+        {/* Quick Actions - Premium Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-6">
           <Link
             href="/habits"
-            className="tap-target group bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-premium active:shadow-premium-lg border border-white/30 dark:border-slate-700/50 transition-all duration-200 touch-active active:scale-[0.98] hover:scale-[1.02] animate-fade-in"
+            className="group relative overflow-hidden tap-target bg-slate-50 dark:bg-slate-800 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-premium-lg active:shadow-premium-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 touch-active active:scale-[0.97] hover:scale-[1.02] hover:shadow-glow animate-fade-in"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-3 group-active:scale-110 transition-transform">
-              <Target className="w-6 h-6 text-white" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-400/0 to-purple-400/0 dark:from-indigo-400/0 dark:to-purple-400/0 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+            <div className="relative z-10">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-600 flex items-center justify-center mb-4 group-active:scale-110 transition-transform shadow-lg group-hover:shadow-xl">
+                <Target className="w-7 h-7 md:w-8 md:h-8 text-white" />
+              </div>
+              <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-2 text-lg md:text-xl">Habits</h3>
+              <p className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent mb-1">
+                {totalCount}
+              </p>
+              <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                {totalCount === 1 ? "Active habit" : "Active habits"}
+              </p>
             </div>
-            <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-1 text-base sm:text-lg">Habits</h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-              {totalCount} active {totalCount === 1 ? "habit" : "habits"}
-            </p>
           </Link>
           <Link
             href="/ideas"
-            className="tap-target group bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-premium active:shadow-premium-lg border border-white/30 dark:border-slate-700/50 transition-all duration-200 touch-active active:scale-[0.98] hover:scale-[1.02] animate-fade-in"
+            className="group relative overflow-hidden tap-target bg-slate-50 dark:bg-slate-800 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-premium-lg active:shadow-premium-xl border border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 touch-active active:scale-[0.97] hover:scale-[1.02] hover:shadow-glow animate-fade-in"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-3 group-active:scale-110 transition-transform">
-              <Lightbulb className="w-6 h-6 text-white" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400/0 to-orange-400/0 dark:from-amber-400/0 dark:to-orange-400/0 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+            <div className="relative z-10">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 flex items-center justify-center mb-4 group-active:scale-110 transition-transform shadow-lg group-hover:shadow-xl">
+                <Lightbulb className="w-7 h-7 md:w-8 md:h-8 text-white" />
+              </div>
+              <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-2 text-lg md:text-xl">Ideas</h3>
+              <p className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-amber-600 to-orange-600 dark:from-amber-400 dark:to-orange-400 bg-clip-text text-transparent mb-1">
+                {totalIdeasCount}
+              </p>
+              <p className="text-xs md:text-sm text-slate-600 dark:text-slate-400 font-medium">
+                {totalIdeasCount === 1 ? "Captured idea" : "Captured ideas"}
+              </p>
             </div>
-            <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-1 text-base sm:text-lg">Ideas</h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-              {recentIdeas.length} recent {recentIdeas.length === 1 ? "idea" : "ideas"}
-            </p>
           </Link>
         </div>
 
-        {/* Recent Ideas */}
-        {recentIdeas.length > 0 && (
-          <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-premium-lg mb-6 border border-white/30 dark:border-slate-700/50 animate-scale-in">
-            <div className="flex items-center justify-between mb-5">
-              <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 tracking-tight">Recent Ideas</h2>
-              <Link
-                href="/ideas"
-                className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
-              >
-                View all →
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:space-y-0">
-              {recentIdeas.map((idea: any) => (
-                <div
-                  key={idea._id}
-                  className="p-4 bg-gradient-to-r from-indigo-50/50 to-purple-50/50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl border-l-4 border-indigo-500 hover:shadow-md transition-shadow h-full"
-                >
-                  <p className="text-sm text-slate-900 dark:text-slate-100 line-clamp-2 font-medium">{idea.text}</p>
-                  {idea.tags && idea.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mt-3">
-                      {idea.tags.map((tag: string, idx: number) => (
-                        <span
-                          key={idx}
-                          className="text-xs px-2.5 py-1 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 rounded-full font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Streak Indicator */}
+        {/* Streak Indicator - Premium */}
         {totalCount > 0 && (
-          <div className="relative overflow-hidden rounded-2xl p-6 md:p-8 text-white shadow-premium-lg animate-scale-in">
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 opacity-90"></div>
-            <div className="absolute inset-0 opacity-20" style={{
+          <div className="relative overflow-hidden rounded-3xl p-6 md:p-8 lg:p-10 text-white shadow-premium-xl animate-scale-in">
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            <div className="absolute inset-0 opacity-30" style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
             }}></div>
-            <div className="relative flex items-center justify-between">
+            <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
-                <p className="text-sm opacity-90 mb-2 font-medium">Current Streak</p>
-                <p className="text-4xl font-bold">🔥 {completionRate > 0 ? "1" : "0"} days</p>
-                <p className="text-xs opacity-80 mt-1">Keep it going!</p>
+                <p className="text-sm md:text-base opacity-90 mb-2 font-semibold tracking-wide">Current Streak</p>
+                <p className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-2">🔥 {completionRate > 0 ? "1" : "0"}</p>
+                <p className="text-base md:text-lg font-bold mb-1">days</p>
+                <p className="text-xs md:text-sm opacity-90 mt-2 font-medium">Keep it going!</p>
               </div>
-              <TrendingUp className="w-16 h-16 opacity-80" />
+              <TrendingUp className="w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 opacity-90 animate-pulse" />
             </div>
           </div>
         )}

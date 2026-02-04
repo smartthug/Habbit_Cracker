@@ -87,7 +87,7 @@ export default function HabitsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-indigo-200 dark:border-indigo-800 border-t-indigo-600 dark:border-t-indigo-400 rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-slate-600 dark:text-slate-400 font-medium">Loading habits...</p>
@@ -97,7 +97,7 @@ export default function HabitsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/30 to-indigo-50/50 dark:from-slate-950 dark:via-purple-950/20 dark:to-indigo-950/30 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pb-24 sm:pb-20 md:pb-6 md:pl-20 lg:pl-64 safe-bottom">
       <div className="max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6 md:py-8">
         <div className="flex items-center justify-between mb-6 md:mb-8">
           <div>
@@ -133,11 +133,13 @@ export default function HabitsPage() {
             {habits.map((habit) => (
               <div
                 key={habit._id}
-                className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl p-5 shadow-lg border border-white/20 dark:border-slate-700/50 hover:shadow-xl transition-all duration-300 h-full flex flex-col"
+                className="group relative overflow-hidden bg-slate-50 dark:bg-slate-800 backdrop-blur-xl rounded-3xl p-6 md:p-7 shadow-premium-lg border border-slate-200/50 dark:border-slate-700/50 hover:shadow-premium-xl hover:scale-[1.02] transition-all duration-300 h-full flex flex-col"
               >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-400/0 to-purple-400/0 dark:from-indigo-400/0 dark:to-purple-400/0 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500"></div>
+                <div className="relative z-10">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
-                    <h3 className="font-bold text-lg text-slate-900 dark:text-slate-100 mb-2">
+                    <h3 className="font-extrabold text-xl md:text-2xl text-slate-900 dark:text-slate-100 mb-3 tracking-tight">
                       {habit.name}
                     </h3>
                     <div className="flex flex-wrap items-center gap-2 text-sm">
@@ -174,21 +176,22 @@ export default function HabitsPage() {
                   </button>
                 </div>
 
-                <div className="flex gap-3 mt-auto">
+                <div className="flex gap-3 mt-auto relative z-10">
                   <button
                     onClick={() => handleLog(habit._id, "done")}
-                    className="tap-target flex-1 flex items-center justify-center gap-2 py-3.5 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold shadow-md active:shadow-lg active:scale-95 transition-all duration-200 touch-active no-select min-h-[48px]"
+                    className="tap-target flex-1 flex items-center justify-center gap-2 py-3.5 px-4 bg-gradient-to-r from-green-500 via-emerald-600 to-teal-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl active:scale-95 transition-all duration-200 touch-active no-select min-h-[48px] hover:scale-[1.02]"
                   >
                     <Check className="w-5 h-5 sm:w-6 sm:h-6" />
                     <span className="text-sm sm:text-base">Done</span>
                   </button>
                   <button
                     onClick={() => handleLog(habit._id, "skipped")}
-                    className="tap-target flex-1 flex items-center justify-center gap-2 py-3.5 px-4 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl font-semibold active:bg-slate-200 dark:active:bg-slate-600 transition-colors touch-active no-select min-h-[48px]"
+                    className="tap-target flex-1 flex items-center justify-center gap-2 py-3.5 px-4 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold active:scale-95 transition-all duration-200 touch-active no-select min-h-[48px] hover:scale-[1.02] shadow-md hover:shadow-lg"
                   >
                     <X className="w-5 h-5 sm:w-6 sm:h-6" />
                     <span className="text-sm sm:text-base">Skip</span>
                   </button>
+                </div>
                 </div>
               </div>
             ))}
